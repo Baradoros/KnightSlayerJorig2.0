@@ -2,6 +2,11 @@ package main;
 
 import javax.swing.JFrame;
 
+/**
+ * Main driver for game.
+ * @author Drew
+ *
+ */
 public class Game extends JFrame {
 
    public Game() {
