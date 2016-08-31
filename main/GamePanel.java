@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Main panel for game.
@@ -13,7 +13,7 @@ import javax.swing.JFrame;
  * @author Drew
  *
  */
-public class GamePanel extends JFrame implements Runnable, ActionListener {
+public class GamePanel extends JPanel implements Runnable, ActionListener {
 
    // Gets screen resolution and stores it
    public static Dimension screenSize = new Dimension(
