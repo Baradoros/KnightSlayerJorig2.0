@@ -14,7 +14,9 @@ public class GamePanel extends JFrame implements Runnable, ActionListener {
          Toolkit.getDefaultToolkit().getScreenSize());
    
    public GamePanel() {
-      
+      setPreferredSize(screenSize);
+      setFocusable(true);
+      requestFocus();
    }
 
    @Override
