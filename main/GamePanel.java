@@ -16,10 +16,7 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel implements Runnable, ActionListener {
 
    // Gets screen resolution and stores it
-   public static Dimension screenSize = new Dimension(
-         Toolkit.getDefaultToolkit().getScreenSize());
-
-   private boolean running;
+   public static Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
 
    private Thread thread = new Thread(this);
 
@@ -49,7 +46,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
        * slowly.
        * 
        * http://gamedev.stackexchange.com/questions/97933/framerate-is-affecting
-       *  -speed-of-object
+       * -speed-of-object
        */
       while (true) {
 
