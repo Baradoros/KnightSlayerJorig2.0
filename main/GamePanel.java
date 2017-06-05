@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
 
       if (fullScreen == 0) // Windowed
          image = new BufferedImage(Game.resolution.width, Game.resolution.height, BufferedImage.TYPE_INT_RGB);
-      else if (fullScreen == 1) // FullScreen windowed
+      else // FullScreen
          image = new BufferedImage(Game.screenSize.width, Game.screenSize.height, BufferedImage.TYPE_INT_RGB);
       g = (Graphics2D) image.getGraphics();
    }
