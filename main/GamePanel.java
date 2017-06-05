@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
    public static Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
    public static Dimension resolution = new Dimension(800, 600);
    private final int TARGET_FPS = 60;
-   private boolean fullScreen;
+   private int fullScreen;
 
    // Game Thread
    private Thread gameThread = new Thread(this);
@@ -29,13 +29,19 @@ public class GamePanel extends JPanel implements Runnable {
    private Graphics2D g;
 
    public GamePanel() {
+      fullScreen = 0;
+      if (fullScreen != 0)
       setPreferredSize(resolution);
+      else if (fullScreen == 1) {
+         setPreferredSize(screenSize);
+      }
+         
       setFocusable(true);
       requestFocus();
-      fullScreen = false;
-      if (fullScreen)
+
+      if (fullScreen == 0) // Windowed
          image = new BufferedImage(resolution.width, resolution.height, BufferedImage.TYPE_INT_RGB);
-      else
+      else if (fullScreen == 1) // FullScreen windowed
          image = new BufferedImage(screenSize.width, screenSize.height, BufferedImage.TYPE_INT_RGB);
       g = (Graphics2D) image.getGraphics();
    }
@@ -44,29 +50,19 @@ public class GamePanel extends JPanel implements Runnable {
    public void run() {
 
       // GAME LOOP
-      /*
-       * This game loop is going to be tricky. I did a bit of research on
-       * framerates and how to regulate them and we need to be sure we update
-       * the game independent of rendering. We need to be extra sure that the
-       * game logic is never dependent on framerate. The method that I used
-       * previously works when the framerate is too high and stuff is flying
-       * around at lightspeed, but on a slow computer everything will still move
-       * slowly.
-       * 
-       * http://gamedev.stackexchange.com/questions/97933/framerate-is-affecting
-       * -speed-of-object
-       * 
-       * Fixed TimeStep with Synchronization
-       */
 
+      /**
+       * Fixed Timestep with synchronization
+       * 
+       * @author Drew
+       */
       while (true) {
          long currentTime = System.currentTimeMillis();
          long targetTime = 1000 / TARGET_FPS;
 
          // GAME/////////////////////////////////////////////////////////////////////////////////
 
-         // END
-         // GAME/////////////////////////////////////////////////////////////////////////////
+         // END//////////////////////////////////////////////////////////////////////////////////
          long elapsed = System.currentTimeMillis() - currentTime;
          long wait = targetTime - elapsed;
 
