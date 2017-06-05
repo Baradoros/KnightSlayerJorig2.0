@@ -1,7 +1,9 @@
 package main;
 
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -17,13 +19,25 @@ public class GamePanel extends JPanel implements Runnable {
    public static Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
    public static Dimension resolution = new Dimension(800, 600);
    private final int TARGET_FPS = 60;
+   private boolean fullScreen;
 
-   private Thread thread = new Thread(this);
+   // Game Thread
+   private Thread gameThread = new Thread(this);
+
+   // Canvas and paint brush
+   private BufferedImage image;
+   private Graphics2D g;
 
    public GamePanel() {
       setPreferredSize(resolution);
       setFocusable(true);
       requestFocus();
+      fullScreen = false;
+      if (fullScreen)
+         image = new BufferedImage(resolution.width, resolution.height, BufferedImage.TYPE_INT_RGB);
+      else
+         image = new BufferedImage(screenSize.width, screenSize.height, BufferedImage.TYPE_INT_RGB);
+      g = (Graphics2D) image.getGraphics();
    }
 
    @Override
@@ -51,12 +65,11 @@ public class GamePanel extends JPanel implements Runnable {
 
          // GAME/////////////////////////////////////////////////////////////////////////////////
 
-         
-         
-         // END GAME/////////////////////////////////////////////////////////////////////////////
+         // END
+         // GAME/////////////////////////////////////////////////////////////////////////////
          long elapsed = System.currentTimeMillis() - currentTime;
          long wait = targetTime - elapsed;
-         
+
          try {
             Thread.sleep(wait);
          } catch (InterruptedException e) {
