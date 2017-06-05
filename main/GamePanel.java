@@ -2,8 +2,6 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
@@ -13,23 +11,19 @@ import javax.swing.JPanel;
  * @author Drew
  *
  */
-public class GamePanel extends JPanel implements Runnable, ActionListener {
+public class GamePanel extends JPanel implements Runnable {
 
    // Gets screen resolution and stores it
    public static Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
+   public static Dimension resolution = new Dimension(800, 600);
+   private final int TARGET_FPS = 60;
 
    private Thread thread = new Thread(this);
 
    public GamePanel() {
-      setPreferredSize(screenSize);
+      setPreferredSize(resolution);
       setFocusable(true);
       requestFocus();
-   }
-
-   @Override
-   public void actionPerformed(ActionEvent arg0) {
-      // TODO Auto-generated method stub
-
    }
 
    @Override
@@ -47,9 +41,27 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
        * 
        * http://gamedev.stackexchange.com/questions/97933/framerate-is-affecting
        * -speed-of-object
+       * 
+       * Fixed TimeStep with Synchronization
        */
-      while (true) {
 
+      while (true) {
+         long currentTime = System.currentTimeMillis();
+         long targetTime = 1000 / TARGET_FPS;
+
+         // GAME/////////////////////////////////////////////////////////////////////////////////
+
+         
+         
+         // END GAME/////////////////////////////////////////////////////////////////////////////
+         long elapsed = System.currentTimeMillis() - currentTime;
+         long wait = targetTime - elapsed;
+         
+         try {
+            Thread.sleep(wait);
+         } catch (InterruptedException e) {
+            e.printStackTrace();
+         }
       }
    }
 
