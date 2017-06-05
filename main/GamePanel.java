@@ -22,8 +22,10 @@ public class GamePanel extends JPanel implements Runnable {
    private Graphics2D g;
 
    public GamePanel(int fullScreen) {
-      if (fullScreen != 0)
+      if (fullScreen == 0)
          setPreferredSize(Game.resolution);
+      else
+         setPreferredSize(Game.screenSize);
 
       setFocusable(true);
       requestFocus();
