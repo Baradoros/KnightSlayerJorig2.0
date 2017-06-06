@@ -5,7 +5,6 @@ import java.awt.GraphicsEnvironment;
 
 import javax.swing.JFrame;
 
-import org.omg.PortableServer.ServantRetentionPolicyOperations;
 
 /**
  * Main driver for game.
